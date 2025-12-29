@@ -1,0 +1,135 @@
+import { useState } from 'react'
+import { CardMenu } from '../../cards/CardMenu'
+import { ButtonMenu } from '../../buttons/ButtonMenu'
+
+import pastelQuatroQueijos from '../../../assets/images/4queijos.png'
+import pastelCalabresa from '../../../assets/images/calabresa.png'
+import pastelCarne from '../../../assets/images/carne.png'
+
+import bebida from '../../../assets/images/bebidas.jpg'
+
+type Categoria = 'pFrito' | 'pAssado' | 'coxinha' | 'bebidas'
+
+type Produto = {
+  id: number
+  titulo: string
+  descricao: string
+  valor: number
+  imagem: string
+}
+
+type SectionMenuProps = {
+  onAdd: (produto: Produto, quantidade: number) => void
+}
+
+export function SectionMenu({ onAdd }: SectionMenuProps) {
+  const [categoria, setCategoria] = useState<Categoria>('pFrito')
+
+  const menuData: Record<Categoria, Produto[]> = {
+    pFrito: [
+      {
+        id: 1,
+        titulo: 'Quatro Queijos',
+        descricao: 'Pastel frito 4 queijos 300gr, mussarela, provolone, parmesão e catupiry',
+        valor: 20.00,
+        imagem: pastelQuatroQueijos,
+      },
+      {
+        id: 2,
+        titulo: 'Calabresa',
+        descricao: 'Pastel frito calabresa 300gr, calabresa, cebola e queijo mussarela',
+        valor: 23.5,
+        imagem: pastelCalabresa,
+      },
+      {
+        id: 3,
+        titulo: 'Pastel de Carne',
+        descricao: 'Pastel frito carne 300gr, carne moída, cebola e queijo mussarela',
+        valor: 25.6,
+        imagem: pastelCarne,
+      },
+    ],
+    pAssado: [
+      {
+        id: 6,
+        titulo: 'pAssado Média',
+        descricao: 'Ideal para compartilhar',
+        valor: 39.9,
+        imagem: pastelQuatroQueijos
+      },
+    ],
+    coxinha: [
+      {
+        id: 7,
+        titulo: 'pAssado Média',
+        descricao: 'Ideal para compartilhar',
+        valor: 39.9,
+        imagem: pastelQuatroQueijos,
+      },
+    ],
+    bebidas: [
+      {
+        id: 8,
+        titulo: 'Refrigerante Lata',
+        descricao: '350ml gelado',
+        valor: 6.5,
+        imagem: bebida,
+      },
+    ],
+  }
+
+  const itemsToShow = menuData[categoria]
+
+  function handleAddProduct(produto: Produto, quantidade: number) {
+    if (quantidade <= 0) return
+    onAdd(produto, quantidade)
+  }
+
+  return (
+    <section className="bg-w1 text-b1 flex flex-col items-center justify-center gap-6 py-24">
+      {/* TOPO */}
+      <div className="flex w-[85%] flex-col items-center gap-5">
+        <h2 className="text-4xl font-bold mt-5">
+          Conheça nosso <span className="text-y0">Menu</span>
+        </h2>
+
+        <div className="flex w-full items-center justify-center gap-2">
+          <ButtonMenu
+            titulo="Pastel Frito"
+            isActive={categoria === 'pFrito'}
+            onClick={() => setCategoria('pFrito')}
+          />
+          <ButtonMenu
+            titulo="Pastel Assado"
+            isActive={categoria === 'pAssado'}
+            onClick={() => setCategoria('pAssado')}
+          />
+          <ButtonMenu
+            titulo="Coxinhas"
+            isActive={categoria === 'coxinha'}
+            onClick={() => setCategoria('coxinha')}
+          />
+          <ButtonMenu
+            titulo="Bebidas"
+            isActive={categoria === 'bebidas'}
+            onClick={() => setCategoria('bebidas')}
+          />
+        </div>
+      </div>
+
+      {/* CARDS */}
+      <div className="grid items-center gap-6 min-[630px]:grid-cols-2 min-[880px]:grid-cols-3 min-[1180px]:grid-cols-4 min-[1480px]:grid-cols-5">
+        {itemsToShow.map((produto) => (
+          <CardMenu
+            key={produto.id}
+            titulo={produto.titulo}
+            descricao={produto.descricao}
+            productImg={produto.imagem}
+            valor={produto.valor}
+            onAdd={(quantidade) => handleAddProduct(produto, quantidade)}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}
