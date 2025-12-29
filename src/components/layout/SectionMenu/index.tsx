@@ -5,6 +5,8 @@ import { ButtonMenu } from '../../buttons/ButtonMenu'
 import pastelQuatroQueijos from '../../../assets/images/4queijos.png'
 import pastelCalabresa from '../../../assets/images/calabresa.png'
 import pastelCarne from '../../../assets/images/carne.png'
+import pastelBrocolis from '../../../assets/images/brocolis.png'
+import pastelFrango from '../../../assets/images/frango.png'
 
 import bebida from '../../../assets/images/bebidas.jpg'
 
@@ -30,37 +32,44 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
       {
         id: 1,
         titulo: 'Quatro Queijos',
-        descricao: 'Pastel frito 4 queijos 300gr, mussarela, provolone, parmesão e catupiry',
+        descricao: 'Pastel frito 4 queijos - 300gr, mussarela, provolone, parmesão e catupiry',
         valor: 20.00,
         imagem: pastelQuatroQueijos,
       },
       {
         id: 2,
         titulo: 'Calabresa',
-        descricao: 'Pastel frito calabresa 300gr, calabresa, cebola e queijo mussarela',
+        descricao: 'Pastel frito calabresa - 300gr, calabresa, cebola e queijo mussarela',
         valor: 23.5,
         imagem: pastelCalabresa,
       },
       {
         id: 3,
         titulo: 'Pastel de Carne',
-        descricao: 'Pastel frito carne 300gr, carne moída, cebola e queijo mussarela',
+        descricao: 'Pastel frito carne - 300gr, carne moída, cebola e queijo mussarela',
         valor: 25.6,
         imagem: pastelCarne,
+      },
+      {
+        id: 4,
+        titulo: 'Pastel de Brocolis',
+        descricao: 'Pastel frito brocolis - 300gr, brocolis, tomate, queijo mussarela e catupiry',
+        valor: 22.0,
+        imagem: pastelBrocolis,
       },
     ],
     pAssado: [
       {
-        id: 6,
-        titulo: 'pAssado Média',
-        descricao: 'Ideal para compartilhar',
-        valor: 39.9,
-        imagem: pastelQuatroQueijos
+        id: 5,
+        titulo: 'Pastel de Frango desfiado',
+        descricao: 'Pastel assado frango - 300gr, frango desfiado, milho, queijo mussarela e catupiry',
+        valor: 29.9,
+        imagem: pastelFrango
       },
     ],
     coxinha: [
       {
-        id: 7,
+        id: 6,
         titulo: 'pAssado Média',
         descricao: 'Ideal para compartilhar',
         valor: 39.9,
@@ -69,7 +78,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
     ],
     bebidas: [
       {
-        id: 8,
+        id: 7,
         titulo: 'Refrigerante Lata',
         descricao: '350ml gelado',
         valor: 6.5,

@@ -89,15 +89,14 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
 
   return (
     <div
-      className={`fixed top-0 right-0 z-50 h-full w-full text-white shadow-xl transition-transform ${
+      className={`bg-gray-900/80 fixed top-0 right-0 z-50 h-full w-full p-5 text-white shadow-xl transition-transform ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
-    >
+      } md:p-15 lg:p-20 `}>
       <form
         onSubmit={handleSubmit}
-        className="bg-w1 text-g2 h-full overflow-y-auto p-6"
+        className="bg-marrom-1 text-y1 h-full overflow-y-auto p-6"
       >
-        <div className="text-g2 mb-4 flex items-center justify-between">
+        <div className="text-y1 mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Finalizar Pedido</h2>
           <button
             type="button"
@@ -111,46 +110,46 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
         {/* Dados */}
 
         <div className="flex flex-col">
-          <h3 className="mb-2 text-lg font-bold">Seus Dados</h3>
+          <h3 className="mb-2 text-lg font-bold mt-5">Seus Dados</h3>
 
           <label>Nome:</label>
           <input
             name="nome"
             required
             placeholder="Seu nome completo"
-            className="input bg-g1 rounded-md border p-2 placeholder:text-gray-500"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
           />
 
-          <label>E-mail:</label>
+          <label className='mt-5'>E-mail:</label>
           <input
             name="email"
             type="email"
             placeholder="seu@email.com"
-            className="input bg-g1 rounded-md border p-2 placeholder:text-gray-500"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
           />
 
-          <label>Telefone:</label>
+          <label className='mt-5'>Telefone:</label>
           <input
             name="telefone"
             required
             placeholder="(11) 99999-9999"
-            className="input bg-g1 rounded-md border p-2 placeholder:text-gray-500"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
           />
         </div>
 
         {/* Tipo entrega */}
         <div className="flex flex-col">
-          <h3 className="mt-6 mb-2 text-lg font-bold">Tipo de Entrega</h3>
+          <h3 className="mt-7 mb-2 text-lg font-bold">Tipo de Entrega</h3>
           <div className="flex items-center justify-around gap-3">
             <button
               type="button"
-              className={`bg-g1 flex cursor-pointer flex-col items-center justify-center rounded-md border p-2 ${modoEntrega === 'entrega' ? 'opacity-100' : 'opacity-60'}`}
+              className={`bg-w1 text-marrom-1  w-[40%] font-medium flex cursor-pointer flex-col items-center justify-center rounded-md border-y1 border-2 p-2 ${modoEntrega === 'entrega' ? 'opacity-100' : 'opacity-60'}`}
               onClick={escolherEntrega}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="25"
+                height="25"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -170,7 +169,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
 
             <button
               type="button"
-              className={`bg-g1 flex cursor-pointer flex-col items-center justify-center rounded-md border p-2 ${modoEntrega === 'retirada' ? 'opacity-100' : 'opacity-60'}`}
+              className={`bg-w1 text-marrom-1 w-[40%] flex cursor-pointer flex-col items-center justify-center rounded-md border-y1 border-2 p-2 ${modoEntrega === 'retirada' ? 'opacity-100' : 'opacity-60'}`}
               onClick={escolherRetirada}
             >
               <svg
@@ -198,14 +197,14 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
           <div
             className={`mt-3 flex flex-col ${modoEntrega === 'entrega' ? 'visible' : 'hidden'}`}
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between mt-7">
               <div className="flex w-[70%] flex-col">
                 <label>Rua:</label>
                 <input
                   name="rua"
                   type="text"
                   placeholder="Rua"
-                  className="input bg-g1 rounded-md border p-2"
+                  className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
                 />
               </div>
 
@@ -215,43 +214,43 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
                   name="numero"
                   type="text"
                   placeholder="Numero"
-                  className="input bg-g1 rounded-md border p-2"
+                  className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
                 />
               </div>
             </div>
 
-            <label className="mt-3">Bairro:</label>
+            <label className="mt-5">Bairro:</label>
             <input
               name="bairro"
               type="text"
               placeholder="bairro"
-              className="input bg-g1 rounded-md border p-2"
+              className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
             />
 
-            <label className="mt-3">Complemento:</label>
+            <label className="mt-5">Complemento:</label>
             <input
               name="complemento"
               type="text"
               placeholder="complemento"
-              className="input bg-g1 rounded-md border p-2"
+              className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y0 border-2"
             />
           </div>
 
           <div
-            className={`mt-3 flex flex-col ${modoEntrega === 'retirada' ? 'visible' : 'hidden'}`}
+            className={`bg-w1 rounded-xl p-3 text-marrom-1 mt-5 flex flex-col ${modoEntrega === 'retirada' ? 'visible' : 'hidden'}`}
           >
-            <h3>Nosso endereço:</h3>
-            <p>Rua da do Açaí, 1234 - Bairro Açaí</p>
+            <h3 className='text-xl font-bold'>Nosso endereço:</h3>
+            <p>Rua do Pastel, 1234 - Bairro Pastelino</p>
             <p>Próximo ao mercado ABC</p>
           </div>
         </div>
 
         {/* Pagamento */}
-        <h3 className="mt-6 mb-2 text-lg font-bold">Forma de Pagamento</h3>
+        <h3 className="mt-7 mb-2 text-lg font-bold">Forma de Pagamento</h3>
 
         <select
           name="pagamento"
-          className="bg-muted border-border text-foreground focus:ring-primary w-full cursor-pointer rounded-lg border px-4 py-3 focus:ring-2 focus:outline-none"
+          className="bg-muted border-2 border-y1 text-foreground text-w1 bg-marrom-3 focus:ring-primary w-full cursor-pointer rounded-lg px-4 py-3 focus:ring-2 focus:outline-none"
         >
           <option value="pix">PIX</option>
           <option value="dinheiro">Dinheiro</option>
@@ -259,7 +258,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
         </select>
 
         {/* Resumo */}
-        <h3 className="mt-6 mb-2 text-lg font-bold">Resumo do Pedido</h3>
+        <h3 className="mt-7 mb-2 text-lg font-bold">Resumo do Pedido</h3>
 
         {cart.map((item) => (
           <div
@@ -273,7 +272,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
           </div>
         ))}
 
-        <div className="text-g1 mt-3 flex justify-between font-bold">
+        <div className="text-y1 mt-3 flex justify-between font-bold">
           <span>Total:</span>
           <span>R$ {total.toFixed(2)}</span>
         </div>
@@ -281,7 +280,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
         {/* Submit */}
         <button
           type="submit"
-          className="bg-g2 text-w1 mt-6 w-full cursor-pointer rounded-lg py-3 font-bold"
+          className="bg-g1 text-w1 mt-6 w-full cursor-pointer rounded-lg py-3 font-bold"
         >
           Enviar Pedido via WhatsApp
         </button>

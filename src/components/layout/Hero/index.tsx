@@ -28,7 +28,7 @@ export function Hero() {
               Pastelaria Aroma e Sabor
             </h1>
             <h2 className="text-[1.2rem] font-medium text-y1 md:text-[1.8rem]">
-              O verdadeiro sabor do pastel artesanal que conquista no primeiro mordida.
+              O verdadeiro sabor do pastel artesanal que conquista na primeira mordida.
             </h2>
             <p className="mt-3 mb-5 text-[1rem] md:text-[1.3rem]">
               Crocrância por fora, recheio generoso por dentro e aquele cheirinho irresistível que te chama de longe.

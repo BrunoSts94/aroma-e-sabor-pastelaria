@@ -16,8 +16,8 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 z-50 w-full bg-gradient-to-br from-[var(--color-b1)] to-[var(--color-b2)] backdrop-blur-md">
-        <div className="flex items-center justify-between border-b px-8 py-4 text-amber-50">
+      <header className="fixed top-0 left-0 z-50 w-full bg-gradient-to-br from-[var(--color-marrom-2)] to-[var(--color-marrom-1)] backdrop-blur-md">
+        <div className="flex items-center justify-between border-b px-8 py-4 text-amber-50 md:px-18 ">
           <h1 className="text-xl font-bold">Aroma e Sabor</h1>
 
           <nav className="hidden sm:flex">

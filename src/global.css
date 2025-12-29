@@ -2,13 +2,16 @@
 
 @theme {
   --color-w1: #f6f5fa;
-  --color-g1: #4ff4a5;
-  --color-g2: #43a87b;
+  --color-g1: #86AD44;
+  --color-g2: #6B8837;
   --color-p1: #b351cd;
   --color-p2: #662e85;
   --color-p3: #2c0047;
   --color-b1: #3A3A3A;
   --color-b2: #474644;
+  --color-marrom-1: #5D2507;
+  --color-marrom-2: #773A1B;
+  --color-marrom-3: #ca8765;
   --color-y0: #E3A715;
   --color-y1: #FFBD13;
 }
