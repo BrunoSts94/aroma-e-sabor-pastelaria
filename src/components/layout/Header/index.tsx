@@ -1,5 +1,6 @@
 import cartIcon from '../../../assets/icons/shoppingCart.svg'
 import menuIcon from '../../../assets/icons/menu.svg'
+import logo from '../../../assets/images/logo.png'
 import { useState } from 'react'
 
 type HeaderProps = {
@@ -18,7 +19,10 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
     <>
       <header className="fixed top-0 left-0 z-50 w-full bg-gradient-to-br from-[var(--color-marrom-2)] to-[var(--color-marrom-1)] backdrop-blur-md">
         <div className="flex items-center justify-between border-b px-8 py-4 text-amber-50 md:px-18 ">
-          <h1 className="text-xl font-bold">Aroma e Sabor</h1>
+          <img 
+          src={logo} 
+          alt="logo do negocio"
+          className='w-10' />
 
           <nav className="hidden sm:flex">
             <ul className="flex gap-8">

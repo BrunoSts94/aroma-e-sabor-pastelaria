@@ -1,4 +1,5 @@
 import type { ItemCarrinho } from '../../../App'
+import { useState } from 'react'
 
 type CartDrawerProps = {
   isOpen: boolean
@@ -23,6 +24,18 @@ export function CartDrawer({
     (acc, item) => acc + item.valor * item.quantidade,
     0
   )
+
+  const [erro, setErro] = useState('')
+
+  function handleFinishClick() {
+    if (cart.length === 0) {
+      setErro('Ops.. Carrinho vazio. Adicione itens para prosseguir.')
+      return
+    }
+
+    setErro('')
+    onFinish()
+  }
 
   return (
     <>
@@ -83,8 +96,14 @@ export function CartDrawer({
               <span className="font-semibold">R$ {total.toFixed(2)}</span>
             </div>
 
+            {erro && (
+              <p className="mb-3 text-sm text-red-600 font-semibold">
+                {erro}
+              </p>
+            )}
+
             <button
-              onClick={onFinish}
+              onClick={handleFinishClick}
               className="w-full cursor-pointer rounded-md bg-amber-500 py-3 font-semibold hover:brightness-90"
             >
               Finalizar Pedido

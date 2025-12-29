@@ -34,15 +34,15 @@ export function CardMenu({
     <div
       className={`relative w-72 overflow-hidden rounded-2xl bg-[#07211B] shadow-lg ${className ?? ''}`}
     >
-      <span className="bg-w1 text-p2 absolute top-4 right-4 z-10 rounded-full px-4 py-1 font-semibold">
+      <span className="bg-w1 text-y0 absolute top-4 right-4 z-10 rounded-full px-4 py-1 font-semibold shadow-[0_5px_10px_1px_#414141]">
         {`R$ ${valor.toFixed(2)}`}
       </span>
 
-      <div className="h-56">
+      <div className="h-46 md:h-56">
         <img
           src={productImg}
           alt="imagem do produto"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-400 ease-out hover:scale-110"
         />
       </div>
 

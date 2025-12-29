@@ -97,8 +97,8 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
   return (
     <section className="bg-w1 text-b1 flex flex-col items-center justify-center gap-6 py-24">
       {/* TOPO */}
-      <div className="flex w-[85%] flex-col items-center gap-5">
-        <h2 className="text-4xl font-bold mt-5">
+      <div className="flex w-8/10 flex-col items-center gap-5">
+        <h2 className="text-[2rem] font-bold text-center">
           Conheça nosso <span className="text-y0">Menu</span>
         </h2>
 
@@ -107,21 +107,25 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
             titulo="Pastel Frito"
             isActive={categoria === 'pFrito'}
             onClick={() => setCategoria('pFrito')}
+            className='w-1/4'
           />
           <ButtonMenu
             titulo="Pastel Assado"
             isActive={categoria === 'pAssado'}
             onClick={() => setCategoria('pAssado')}
+            className='w-1/4'
           />
           <ButtonMenu
             titulo="Coxinhas"
             isActive={categoria === 'coxinha'}
             onClick={() => setCategoria('coxinha')}
+            className='w-1/4'
           />
           <ButtonMenu
             titulo="Bebidas"
             isActive={categoria === 'bebidas'}
             onClick={() => setCategoria('bebidas')}
+            className='w-1/4'
           />
         </div>
       </div>
