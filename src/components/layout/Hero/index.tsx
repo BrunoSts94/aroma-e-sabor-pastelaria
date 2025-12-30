@@ -25,15 +25,15 @@ export function Hero() {
           className='bg-w1/95 rounded-4xl text-b1 p-5
           flex flex-col text-justify md:p-10'>
 
-            <h1 className="text-[2rem] md:text-[3rem] font-bold text-center">
+            <h1 className="text-marrom-1 text-[2rem] md:text-[3rem] font-bold text-center">
               Aroma e Sabor
             </h1>
             
-            <h2 className="text-[1.2rem] md:text-[1.8rem] text-center font-medium text-y1 ">
+            <h2 className="text-[1.2rem] md:text-[1.8rem] text-center font-medium text-y0 ">
               Pastelaria Artesanal
             </h2>
 
-            <p className="mt-3 text-[1rem] md:text-[1.3rem]">
+            <p className="mt-3 text-marrom-1 text-[1rem] md:text-[1.3rem]">
               Crocrância por fora, recheio generoso por dentro e aquele cheirinho irresistível que te chama de longe.
             </p>
             <p className="text-[1rem] md:text-[1.3rem]"> Na Aroma e Sabor, cada pastel é preparado na hora, com ingredientes selecionados e muito carinho, para transformar sua pausa em um momento delicioso.</p>

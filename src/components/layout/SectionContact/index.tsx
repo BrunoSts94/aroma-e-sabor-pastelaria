@@ -1,6 +1,7 @@
 //components
 import { CardContact } from '../../cards/CardContact'
 import endereco from '../../../assets/icons/location.svg'
+import clock from '../../../assets/icons/clock.svg'
 
 export function SectionContact(){
 
@@ -22,11 +23,14 @@ export function SectionContact(){
                 className='flex flex-col gap-5 text-center'>
 
                     <h2 
-                    className='text-marrom-1 text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-bold'>Nossa Localização</h2>
+                    className='text-marrom-1 text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-bold'>
+                        Nossa <span className='text-y0'>Localização</span>
+                    </h2>
                     
                     <p
                     className='text-marrom-1 md:text-[1.3rem]'>
-                        Venha nos visitar e experimente nossos pastéis crocantes e bem recheados.</p>
+                        Venha nos visitar e experimente nossos pastéis crocantes e bem recheados.
+                    </p>
 
                 </div>
 
@@ -51,14 +55,16 @@ export function SectionContact(){
                         textPrimary='Endereço'
                         textSecundary='Av. Pastelino Pereira - RS Centro'
                         icon={endereco}/>
-                        <CardContact
-                        textPrimary='Endereço'
-                        textSecundary='Av. Pastelino Pereira - RS Centro'
-                        icon={endereco}/>
                         
                         <CardContact
-                        textPrimary='Endereço'
-                        textSecundary='Av. Pastelino Pereira - RS Centro'
+                        textPrimary='Horário de Atendimento'
+                        textSecundary='Segunda a Sexta: 10h às 22h'
+                        textThird='Sábado e Domingo: 12h às 23h'
+                        icon={clock}/>
+                        
+                        <CardContact
+                        textPrimary='Contato'
+                        textSecundary='WhatsApp: (54) 9 9181-7161'
                         icon={endereco}/>
                     </div>
                 </div>

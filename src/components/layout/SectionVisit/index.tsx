@@ -25,17 +25,17 @@ export function SectionVisit() {
         </div>
 
         <div
-        className='flex justify-between items-center mt-10'>
+        className='flex justify-between items-center mt-10 lg:mb-5'>
 
           <img
           src={local1}
           alt="imagem do local"
-          className=" w-[48%] rounded-2xl border-2 md:border-3 lg:border-4 border-w1"/>
+          className=" w-[48%] md:h-70 md:w-92  lg:h-75 lg:w-[49%] rounded-2xl border-2 md:border-3 lg:border-4 border-w1"/>
 
           <img
           src={local1}
           alt="imagem do local"
-          className=" w-[48%] rounded-2xl border-2 md:border-3 lg:border-4 border-w1"/>
+          className=" w-[48%] md:h-70 md:w-92 lg:h-75 lg:w-[49%] rounded-2xl border-2 md:border-3 lg:border-4 border-w1"/>
 
         </div>
         <SwipeCarousel />
