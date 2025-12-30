@@ -95,53 +95,60 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
   }
 
   return (
-    <section className="bg-w1 text-b1 flex flex-col items-center justify-center gap-6 py-24">
-      {/* TOPO */}
-      <div className="flex w-8/10 flex-col items-center gap-5">
-        <h2 className="text-[2rem] font-bold text-center">
-          Conheça nosso <span className="text-y0">Menu</span>
-        </h2>
+    <section 
+    className="bg-w1 text-marrom-1 flex items-center justify-center py-20">
+      <div 
+      className='w-8/10 flex flex-col gap-10 items-center'>
 
-        <div className="flex w-full items-center justify-center gap-2">
-          <ButtonMenu
-            titulo="Pastel Frito"
-            isActive={categoria === 'pFrito'}
-            onClick={() => setCategoria('pFrito')}
-            className='w-1/4'
-          />
-          <ButtonMenu
-            titulo="Pastel Assado"
-            isActive={categoria === 'pAssado'}
-            onClick={() => setCategoria('pAssado')}
-            className='w-1/4'
-          />
-          <ButtonMenu
-            titulo="Coxinhas"
-            isActive={categoria === 'coxinha'}
-            onClick={() => setCategoria('coxinha')}
-            className='w-1/4'
-          />
-          <ButtonMenu
-            titulo="Bebidas"
-            isActive={categoria === 'bebidas'}
-            onClick={() => setCategoria('bebidas')}
-            className='w-1/4'
-          />
+        <div 
+        className="flex flex-col items-center gap-5 w-full">
+
+          <h2 className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-bold text-center">
+            Conheça nosso <span className="text-y0">Menu</span>
+          </h2>
+          
+          <div className="flex w-full items-center justify-center gap-3 lg:gap-5">
+            <ButtonMenu
+              titulo="Pastel Frito"
+              isActive={categoria === 'pFrito'}
+              onClick={() => setCategoria('pFrito')}
+              className='w-1/4'
+            />
+            <ButtonMenu
+              titulo="Pastel Assado"
+              isActive={categoria === 'pAssado'}
+              onClick={() => setCategoria('pAssado')}
+              className='w-1/4'
+            />
+            <ButtonMenu
+              titulo="Coxinhas"
+              isActive={categoria === 'coxinha'}
+              onClick={() => setCategoria('coxinha')}
+              className='w-1/4'
+            />
+            <ButtonMenu
+              titulo="Bebidas"
+              isActive={categoria === 'bebidas'}
+              onClick={() => setCategoria('bebidas')}
+              className='w-1/4'
+            />
+          </div>
         </div>
-      </div>
 
-      {/* CARDS */}
-      <div className="grid items-center gap-6 min-[630px]:grid-cols-2 min-[880px]:grid-cols-3 min-[1180px]:grid-cols-4 min-[1480px]:grid-cols-5">
-        {itemsToShow.map((produto) => (
-          <CardMenu
-            key={produto.id}
-            titulo={produto.titulo}
-            descricao={produto.descricao}
-            productImg={produto.imagem}
-            valor={produto.valor}
-            onAdd={(quantidade) => handleAddProduct(produto, quantidade)}
-          />
-        ))}
+        {/* CARDS */}
+        <div 
+        className="grid items-center gap-5 md:gap-8 lg:gap-10 min-[880px]:grid-cols-2  min-[1180px]:grid-cols-4">
+          {itemsToShow.map((produto) => (
+            <CardMenu
+              key={produto.id}
+              titulo={produto.titulo}
+              descricao={produto.descricao}
+              productImg={produto.imagem}
+              valor={produto.valor}
+              onAdd={(quantidade) => handleAddProduct(produto, quantidade)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

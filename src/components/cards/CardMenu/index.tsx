@@ -1,4 +1,4 @@
-import cart from '../../../assets/icons/shoppingCart.svg'
+import cart from '../../../assets/icons/shoppingCart2.svg'
 import { useState } from 'react'
 
 type CardMenuProps = {
@@ -32,9 +32,9 @@ export function CardMenu({
 
   return (
     <div
-      className={`relative w-72 overflow-hidden rounded-2xl bg-[#07211B] shadow-lg ${className ?? ''}`}
+      className={`relative w-72 overflow-hidden rounded-2xl bg-marrom-1 shadow-lg ${className ?? ''}`}
     >
-      <span className="bg-w1 text-y0 absolute top-4 right-4 z-10 rounded-full px-4 py-1 font-semibold shadow-[0_5px_10px_1px_#414141]">
+      <span className="bg-marrom-1 text-w1 absolute top-4 right-4 z-10 rounded-full px-4 py-1 font-semibold shadow-[0_5px_10px_1px_#414141]">
         {`R$ ${valor.toFixed(2)}`}
       </span>
 
@@ -46,26 +46,33 @@ export function CardMenu({
         />
       </div>
 
-      <div className="text-w1 flex flex-col gap-3 p-4">
-        <h3 className="text-lg font-semibold">{titulo}</h3>
+      <div className="flex flex-col gap-3 p-4">
+        <h3 
+        className="text-lg font-semibold text-y0">{titulo}</h3>
 
-        <p className="line-clamp-2 text-sm text-stone-400">{descricao}</p>
+        <p 
+        className="line-clamp-2 text-sm text-w1">{descricao}</p>
 
-        <div className="mt-2 flex items-center justify-between">
-          <div className="flex items-center justify-center gap-2">
+        <div 
+        className="mt-2 flex items-center justify-between">
+
+          <div 
+          className="flex items-center justify-center gap-2">
+
             <button
               type="button"
-              className="cursor-pointer text-4xl"
+              className="cursor-pointer text-4xl text-w1"
               onClick={decrementaQuantidade}
             >
               -
             </button>
 
-            <span>{quantidade}</span>
+            <span 
+            className='text-y0 text-[1.2rem]'>{quantidade}</span>
 
             <button
               type="button"
-              className="cursor-pointer text-4xl"
+              className="cursor-pointer text-4xl text-w1"
               onClick={incrementaQuantidade}
             >
               +
@@ -76,10 +83,15 @@ export function CardMenu({
             onClick={() => onAdd(quantidade)}
             disabled={quantidade === 0}
             type="button"
-            className="bg-b1 hover:shadow-[0_0_15px_2px_#FFBD13] transition-shadow duration-300 flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 font-semibold transition disabled:cursor-not-allowed disabled:bg-stone-500 disabled:opacity-50"
+            className="bg-y0 hover:opacity-80 transition-shadow duration-300 flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 font-semibold transition disabled:cursor-not-allowed disabled:bg-stone-500 disabled:opacity-50"
           >
-            <img src={cart} alt="icone do carrinho" className="w-8" />
-            <span>Adicionar</span>
+            <img src={cart} 
+            alt="icone do carrinho" 
+            className="w-8 " />
+
+            <span
+            className='text-[1.1rem]'>Adicionar</span>
+
           </button>
         </div>
       </div>

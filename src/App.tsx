@@ -4,6 +4,9 @@ import { Hero } from './components/layout/Hero'
 import { SectionMenu } from './components/layout/SectionMenu'
 import { CartDrawer } from './components/cart/CartDrawer'
 import { CheckoutDrawer } from './components/cart/CheckoutDrawer'
+import { SectionVisit } from './components/layout/SectionVisit'
+import { SectionContact } from './components/layout/SectionContact'
+import { Footer } from './components/layout/Footer'
 
 export type Produto = {
   id: number
@@ -100,6 +103,12 @@ export default function App() {
         cart={cart}
         onClose={() => setCheckoutOpen(false)}
       />
+
+      <SectionVisit/>
+
+      <SectionContact/>
+
+      <Footer/>
     </>
   )
 }

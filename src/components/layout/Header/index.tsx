@@ -18,11 +18,17 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
   return (
     <>
       <header className="fixed top-0 left-0 z-50 w-full bg-gradient-to-br from-[var(--color-marrom-2)] to-[var(--color-marrom-1)] backdrop-blur-md">
-        <div className="flex items-center justify-between border-b px-8 py-4 text-amber-50 md:px-18 ">
-          <img 
-          src={logo} 
-          alt="logo do negocio"
-          className='w-10' />
+        <div className="flex items-center justify-between border-b-3 px-8 py-4 text-w1 md:px-18 ">
+          <div 
+          className="flex items-center gap-3 cursor-pointer">
+            <img
+            src={logo}
+            alt="logo do negocio"
+            className='w-10 md:w-15 lg:w-20' />
+
+            <h3
+            className='font-bold text-[1.2rem]'>Aroma e Sabor</h3>
+          </div>
 
           <nav className="hidden sm:flex">
             <ul className="flex gap-8">
@@ -39,7 +45,7 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
               <img
                 src={cartIcon}
                 alt="Carrinho"
-                className="w-9 cursor-pointer"
+                className="w-10 lg:w-12 cursor-pointer"
                 onClick={onOpenCart}
               />
 
