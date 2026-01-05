@@ -91,6 +91,35 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
 
   const topRef = useRef<HTMLDivElement | null>(null)
 
+  //logica para arraste de scroll na barra de categorias
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  function onMouseDown(e: React.MouseEvent) {
+  isDragging.current = true;
+  startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0);
+  scrollLeft.current = scrollRef.current?.scrollLeft || 0;
+  }
+
+  function onMouseLeave() {
+    isDragging.current = false;
+  }
+
+  function onMouseUp() {
+    isDragging.current = false;
+  }
+
+  function onMouseMove(e: React.MouseEvent) {
+    if (!isDragging.current || !scrollRef.current) return;
+
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  }
+
   function handleAddProduct(produto: Produto, quantidade: number) {
     if (quantidade <= 0) return
     onAdd(produto, quantidade)
@@ -117,31 +146,35 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
             Conheça nosso <span className="text-y0">Menu</span>
           </h2>
 
-            <div className=" flex w-full items-center justify-center gap-3 lg:gap-5">
+            <div
+            ref={scrollRef}
+            onMouseDown={onMouseDown}
+            onMouseLeave={onMouseLeave}
+            onMouseUp={onMouseUp}
+            onMouseMove={onMouseMove}
+            className=" flex w-full border-2 border-y0 rounded-lg px-5 items-center gap-5 md:gap-8 lg:gap-12 
+            overflow-x-scroll whitespace-nowrap select-none cursor-grab active:cursor-grabbing scrollbar-hide py-3">
               
               <ButtonMenu
                 titulo="Pastel Frito"
                 isActive={categoria === 'pFrito'}
                 onClick={() => setCategoria('pFrito')}
-                className='w-1/4'
+                
               />
               <ButtonMenu
                 titulo="Pastel Assado"
                 isActive={categoria === 'pAssado'}
                 onClick={() => setCategoria('pAssado')}
-                className='w-1/4'
               />
               <ButtonMenu
                 titulo="Coxinhas"
                 isActive={categoria === 'coxinha'}
                 onClick={() => setCategoria('coxinha')}
-                className='w-1/4'
               />
               <ButtonMenu
                 titulo="Bebidas"
                 isActive={categoria === 'bebidas'}
                 onClick={() => setCategoria('bebidas')}
-                className='w-1/4'
               />
           </div>
         </div>

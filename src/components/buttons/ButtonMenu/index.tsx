@@ -18,7 +18,7 @@ export function ButtonMenu({
     <button
       type="button"
       onClick={onClick}
-      className={`btn-menu ${isActive ? 'ativo' : ''} ${className ?? ''}`}
+      className={`text-xl md:text-3xl lg:text-4xl font-bold text-y0 ${className ?? ''} shrink-0 cursor-pointer`}
       {...rest}
     >
       {titulo}
