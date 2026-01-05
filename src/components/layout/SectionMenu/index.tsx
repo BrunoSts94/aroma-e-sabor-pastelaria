@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { CardMenu } from '../../cards/CardMenu'
 import { ButtonMenu } from '../../buttons/ButtonMenu'
 
@@ -89,10 +89,19 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
 
   const itemsToShow = menuData[categoria]
 
+  const topRef = useRef<HTMLDivElement | null>(null)
+
   function handleAddProduct(produto: Produto, quantidade: number) {
     if (quantidade <= 0) return
     onAdd(produto, quantidade)
   }
+
+  useEffect(() => {
+  topRef.current?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+}, [categoria])
 
   return (
     <section 
@@ -109,6 +118,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
           </h2>
 
             <div className=" flex w-full items-center justify-center gap-3 lg:gap-5">
+              
               <ButtonMenu
                 titulo="Pastel Frito"
                 isActive={categoria === 'pFrito'}
@@ -136,6 +146,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
           </div>
         </div>
 
+        <div ref={topRef}></div>
         {/* CARDS */}
         <div 
         className="grid items-center gap-5 md:gap-8 lg:gap-10 min-[880px]:grid-cols-2  min-[1180px]:grid-cols-4">
