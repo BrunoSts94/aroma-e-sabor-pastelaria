@@ -101,37 +101,38 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
       className='w-8/10 flex flex-col gap-10 items-center'>
 
         <div 
-        className="flex flex-col items-center gap-5 w-full">
+        className="flex flex-col items-center gap-5 w-full sticky top-0 z-20
+        bg-w1 py-5">
 
           <h2 className="text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-bold text-center">
             Conheça nosso <span className="text-y0">Menu</span>
           </h2>
-          
-          <div className="flex w-full items-center justify-center gap-3 lg:gap-5">
-            <ButtonMenu
-              titulo="Pastel Frito"
-              isActive={categoria === 'pFrito'}
-              onClick={() => setCategoria('pFrito')}
-              className='w-1/4'
-            />
-            <ButtonMenu
-              titulo="Pastel Assado"
-              isActive={categoria === 'pAssado'}
-              onClick={() => setCategoria('pAssado')}
-              className='w-1/4'
-            />
-            <ButtonMenu
-              titulo="Coxinhas"
-              isActive={categoria === 'coxinha'}
-              onClick={() => setCategoria('coxinha')}
-              className='w-1/4'
-            />
-            <ButtonMenu
-              titulo="Bebidas"
-              isActive={categoria === 'bebidas'}
-              onClick={() => setCategoria('bebidas')}
-              className='w-1/4'
-            />
+
+            <div className=" flex w-full items-center justify-center gap-3 lg:gap-5">
+              <ButtonMenu
+                titulo="Pastel Frito"
+                isActive={categoria === 'pFrito'}
+                onClick={() => setCategoria('pFrito')}
+                className='w-1/4'
+              />
+              <ButtonMenu
+                titulo="Pastel Assado"
+                isActive={categoria === 'pAssado'}
+                onClick={() => setCategoria('pAssado')}
+                className='w-1/4'
+              />
+              <ButtonMenu
+                titulo="Coxinhas"
+                isActive={categoria === 'coxinha'}
+                onClick={() => setCategoria('coxinha')}
+                className='w-1/4'
+              />
+              <ButtonMenu
+                titulo="Bebidas"
+                isActive={categoria === 'bebidas'}
+                onClick={() => setCategoria('bebidas')}
+                className='w-1/4'
+              />
           </div>
         </div>
 

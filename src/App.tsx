@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { Element } from 'react-scroll'
+
+// Components
 import { Header } from './components/layout/Header'
 import { Hero } from './components/layout/Hero'
 import { SectionMenu } from './components/layout/SectionMenu'
@@ -82,11 +85,14 @@ export default function App() {
 
   return (
     <>
-      <Header onOpenCart={openCart} totalItens={totalItens} />
+      <Element name="inicio">
+        <Header onOpenCart={openCart} totalItens={totalItens} />
+        <Hero />
+      </Element>
 
-      <Hero />
-
-      <SectionMenu onAdd={addToCart} />
+      <Element name="cardapio">
+        <SectionMenu onAdd={addToCart} />
+      </Element>
 
       <CartDrawer
         isOpen={cartOpen}
@@ -104,9 +110,13 @@ export default function App() {
         onClose={() => setCheckoutOpen(false)}
       />
 
-      <SectionVisit/>
+      <Element name="local">
+        <SectionVisit/>
+      </Element>
 
-      <SectionContact/>
+      <Element name="contato">
+        <SectionContact/>
+      </Element>
 
       <Footer/>
     </>

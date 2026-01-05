@@ -94,7 +94,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
       } md:p-15 lg:p-20 `}>
       <form
         onSubmit={handleSubmit}
-        className="bg-marrom-1 text-y1 h-full overflow-y-auto p-6"
+        className="bg-marrom-1 text-y1 h-full overflow-y-auto p-8 md:p-10 lg:p-15"
       >
         <div className="text-y1 mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Finalizar Pedido</h2>

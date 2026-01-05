@@ -2,6 +2,7 @@ import cartIcon from '../../../assets/icons/shoppingCart.svg'
 import menuIcon from '../../../assets/icons/menu.svg'
 import logo from '../../../assets/images/logo.png'
 import { useState } from 'react'
+import { Link } from 'react-scroll'
 
 type HeaderProps = {
   onOpenCart: () => void
@@ -10,6 +11,13 @@ type HeaderProps = {
 
 export function Header({ onOpenCart, totalItens }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const menuItems = [
+    { label: "Início", to: "inicio" },
+    { label: "Cardápio", to: "cardapio" },
+    { label: "Local", to: "local" },
+    { label: "Contato", to: "contato" },
+  ];
 
   function toggleMenu() {
     setMenuOpen((prev) => !prev)
@@ -21,20 +29,32 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
         <div className="flex items-center justify-between border-b-3 px-8 py-4 text-w1 md:px-18 ">
           <div 
           className="flex items-center gap-3 cursor-pointer">
-            <img
-            src={logo}
-            alt="logo do negocio"
-            className='w-10 md:w-15 lg:w-20' />
-
-            <h3
-            className='font-bold text-[1.2rem]'>Aroma e Sabor</h3>
+            <Link to="inicio" smooth={true} duration={500} className='flex items-center gap-2'>
+              <img
+              src={logo}
+              alt="logo do negocio"
+              className='w-10 md:w-15 lg:w-20' />
+              <h3
+              className='font-bold text-[1.2rem]'>Aroma e Sabor
+              </h3>
+            </Link>
           </div>
 
           <nav className="hidden sm:flex">
             <ul className="flex gap-8">
-              {['Início', 'Cardápio', 'Sobre', 'Contato'].map((item) => (
-                <li key={item} className="cursor-pointer hover:text-amber-300 transition duration-300 ease-in-out hover:scale-105">
-                  {item}
+              {menuItems.map((item) => (
+                <li
+                  key={item.to}
+                  className="cursor-pointer hover:text-amber-300 transition duration-300 ease-in-out hover:scale-105"
+                >
+                  <Link
+                    to={item.to}
+                    smooth
+                    duration={500}
+                    offset={-80}
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,10 +100,41 @@ export function Header({ onOpenCart, totalItens }: HeaderProps) {
       >
         <nav className="p-6">
           <ul className="flex flex-col gap-4 text-lg">
-            <li className="cursor-pointer hover:text-amber-400 border-b">Início</li>
-            <li className="cursor-pointer hover:text-amber-300 border-b">Cardápio</li>
-            <li className="cursor-pointer hover:text-amber-300 border-b">Sobre</li>
-            <li className="cursor-pointer hover:text-amber-300 border-b">Contato</li>
+            <Link
+              to='inicio'
+              smooth
+              duration={500}>
+              <li className="cursor-pointer hover:text-y1 border-b">
+                Início
+              </li>
+            </Link>
+
+            <Link
+            to='cardapio'
+            smooth
+            duration={500}>
+              <li className="cursor-pointer hover:text-y1 border-b">
+                Cardápio
+              </li>
+            </Link>
+
+            <Link
+            to='local'
+            smooth
+            duration={500}>
+              <li className="cursor-pointer hover:text-y1 border-b">
+                Local
+              </li>
+            </Link>
+
+            <Link
+            to='contato'
+            smooth
+            duration={500}>
+              <li className="cursor-pointer hover:text-y1 border-b">
+                Contato
+              </li>
+            </Link>
           </ul>
         </nav>
       </aside>
