@@ -18,7 +18,8 @@
     "react-dom": "^19.2.0",
     "react-scroll": "^1.9.3",
     "tailwind-scrollbar": "^4.0.2",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

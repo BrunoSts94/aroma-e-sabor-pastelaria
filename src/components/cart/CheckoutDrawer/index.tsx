@@ -1,5 +1,7 @@
+import { m } from 'framer-motion'
 import type { ItemCarrinho } from '../../../App'
 import { useState } from 'react'
+import * as Yup from 'yup'
 
 type Props = {
   isOpen: boolean
@@ -8,6 +10,46 @@ type Props = {
 }
 
 export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
+
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  // Validação com Yup
+  const schema = Yup.object({
+    nome: Yup.string()
+      .min(3)
+      .required('O nome inválido, deve ser preenchido corretamente'),
+
+    email: Yup.string()
+      .email('E-mail inválido, verifique o preenchimento')
+      .required('O e-mail é obrigatório'),
+
+    telefone: Yup.string()
+    .matches(/^\(?\d{2}\)?\s?9\d{4}-?\d{4}$/, 'Informe um celular válido. Ex: (11) 91234-5678')
+    .required('O telefone é obrigatório'),
+
+    rua: Yup.string().when('modoEntrega', {
+    is: 'entrega',
+    then: (schema) => schema.required('A rua é obrigatória'),
+    otherwise: (schema) => schema.notRequired(),
+    }),
+
+    numero: Yup.string().when('modoEntrega', {
+      is: 'entrega',
+      then: (schema) => schema.required('O número é obrigatório'),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
+    bairro: Yup.string().when('modoEntrega', {
+      is: 'entrega',
+      then: (schema) => schema.required('O bairro é obrigatório'),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+
+    complemento: Yup.string().notRequired(),
+    observacao: Yup.string().notRequired(),
+    pagamento: Yup.string().required('Selecione a forma de pagamento'),
+    })
+
   const total = cart.reduce(
     (acc, item) => acc + item.valor * item.quantidade,
     0
@@ -16,16 +58,47 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
     'entrega'
   )
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault()
     const formData = new FormData(e.currentTarget)
+
+    const data = {
+      nome: formData.get('nome'),
+      telefone: formData.get('telefone'),
+      email: formData.get('email'),
+      observacao: formData.get('observacao'),
+      rua: formData.get('rua'),
+      numero: formData.get('numero'),
+      bairro: formData.get('bairro'),
+      complemento: formData.get('complemento'),
+      pagamento: formData.get('pagamento'),
+      modoEntrega,
+    }
+
+    try {
+      setErrors({})
+      await schema.validate(data, { abortEarly: false })
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const fieldErrors: Record<string, string> = {}
+
+        err.inner.forEach(error => {
+          if (error.path) {
+            fieldErrors[error.path] = error.message
+          }
+        })
+
+        setErrors(fieldErrors)
+        return
+      }
+    }
 
     const nome = formData.get('nome')
     const telefone = formData.get('telefone')
     const pagamento = formData.get('pagamento')
     const rua = formData.get('rua')
     const numero = formData.get('numero')
+    const observacao = formData.get('observacao')
     const bairro = formData.get('bairro')
     const complemento = formData.get('complemento')
     const numeroPedido = gerarNumeroPedido()
@@ -65,6 +138,8 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
     Itens:
     ${itensTexto}
 
+    *Observação:* ${observacao || '—'}
+
     *Total: R$ ${total.toFixed(2)}*
     Pagamento: ${pagamento}
       `
@@ -93,9 +168,11 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } md:p-15 lg:p-20 `}>
       <form
+        noValidate
         onSubmit={handleSubmit}
         className="bg-marrom-1 text-y1 h-full overflow-y-auto p-8 md:p-10 lg:p-15"
       >
+
         <div className="text-y1 mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold">Finalizar Pedido</h2>
           <button
@@ -115,25 +192,38 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
           <label>Nome:</label>
           <input
             name="nome"
-            required
+            type='text'
             placeholder="Seu nome completo"
-            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
+            className={`input rounded-md p-2 placeholder:text-w1/70 text-w1 border-2 bg-marrom-3 transition-colors
+            ${errors.nome ? 'border-red-500 focus:ring-red-500' : 'border-y1 focus:ring-y1'}
+            `}
           />
+          {errors.nome && <span className="text-red-500 text-sm">{errors.nome}</span>}
 
           <label className='mt-5'>E-mail:</label>
           <input
             name="email"
             type="email"
             placeholder="seu@email.com"
-            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1/70 text-w1 border-y1 border-2"
           />
+          {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
 
           <label className='mt-5'>Telefone:</label>
           <input
+            type="tel"
             name="telefone"
-            required
             placeholder="(11) 99999-9999"
-            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1/70 text-w1 border-y1 border-2"
+          />
+          {errors.telefone && <span className="text-red-500 text-sm">{errors.telefone}</span>}
+
+          <label className='mt-5'>Observação:</label>
+          <input
+            type="text"
+            name="observacao"
+            placeholder="* Observações sobre o pedido"
+            className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1/70 text-w1 border-y1 border-2"
           />
         </div>
 
@@ -206,6 +296,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
                   placeholder="Rua"
                   className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
                 />
+                {errors.rua && <span className="text-red-500 text-sm">{errors.rua}</span>}
               </div>
 
               <div className="flex w-[25%] flex-col">
@@ -216,6 +307,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
                   placeholder="Numero"
                   className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
                 />
+                {errors.numero && <span className="text-red-500 text-sm">{errors.numero}</span>}
               </div>
             </div>
 
@@ -226,6 +318,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
               placeholder="bairro"
               className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y1 border-2"
             />
+            {errors.bairro && <span className="text-red-500 text-sm">{errors.bairro}</span>}
 
             <label className="mt-5">Complemento:</label>
             <input
@@ -234,6 +327,7 @@ export function CheckoutDrawer({ isOpen, onClose, cart }: Props) {
               placeholder="complemento"
               className="input bg-marrom-3 rounded-md p-2 placeholder:text-w1 text-w1 border-y0 border-2"
             />
+            {errors.complemento && <span className="text-red-500 text-sm">{errors.complemento}</span>}
           </div>
 
           <div

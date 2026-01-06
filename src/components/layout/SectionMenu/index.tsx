@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { CardMenu } from '../../cards/CardMenu'
 import { ButtonMenu } from '../../buttons/ButtonMenu'
 
@@ -8,9 +8,13 @@ import pastelCarne from '../../../assets/images/carne.png'
 import pastelBrocolis from '../../../assets/images/brocolis.png'
 import pastelFrango from '../../../assets/images/frango.png'
 
-import bebida from '../../../assets/images/bebidas.jpg'
+import coca600 from '../../../assets/images/coca.webp'
+import fanta600 from '../../../assets/images/fanta.webp'
+import spriteLt from '../../../assets/images/sprite.jpg'
 
-type Categoria = 'pFrito' | 'pAssado' | 'coxinha' | 'bebidas'
+import pettitGateau from '../../../assets/images/pettit.jpg'
+
+type Categoria = 'pFrito' | 'pAssado' | 'coxinha' | 'bebidas' | 'sobremesas'
 
 type Produto = {
   id: number
@@ -79,10 +83,33 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
     bebidas: [
       {
         id: 7,
-        titulo: 'Refrigerante Lata',
-        descricao: '350ml gelado',
-        valor: 6.5,
-        imagem: bebida,
+        titulo: 'Coca-Cola',
+        descricao: 'Garrafinha 600ml',
+        valor: 8.0,
+        imagem: coca600,
+      },
+      {
+        id: 8,
+        titulo: 'Fanta Laranja',
+        descricao: 'Garrafinha 600ml',
+        valor: 8.0,
+        imagem: fanta600,
+      },
+      {
+        id: 9,
+        titulo: 'Sprite',
+        descricao: 'Lata 500ml',
+        valor: 6.0,
+        imagem: spriteLt,
+      },
+    ],
+    sobremesas: [
+      {
+        id: 8,
+        titulo: 'Pettit Gateau',
+        descricao: '80 gramas com delicioso sorvete de chocolate',
+        valor: 12.5,
+        imagem: pettitGateau,
       },
     ],
   }
@@ -90,6 +117,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
   const itemsToShow = menuData[categoria]
 
   const topRef = useRef<HTMLDivElement | null>(null)
+  const isFirstRender = useRef(true)
 
   //logica para arraste de scroll na barra de categorias
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -126,11 +154,24 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
   }
 
   useEffect(() => {
-  topRef.current?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
-}, [categoria])
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    window.scrollTo(0, 0)
+  }, [])
+
+  useLayoutEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
+    topRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      })
+    }, [categoria])
 
   return (
     <section 
@@ -138,6 +179,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
       <div 
       className='w-8/10 flex flex-col gap-10 items-center'>
 
+        <div ref={topRef}></div>
         <div 
         className="flex flex-col items-center gap-5 w-full sticky top-0 z-20
         bg-w1 py-5">
@@ -153,7 +195,7 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
             onMouseUp={onMouseUp}
             onMouseMove={onMouseMove}
             className=" flex w-full border-2 border-y0 rounded-lg px-5 items-center gap-5 md:gap-8 lg:gap-12 
-            overflow-x-scroll whitespace-nowrap select-none cursor-grab active:cursor-grabbing scrollbar-hide py-3">
+            overflow-x-auto whitespace-nowrap select-none cursor-grab active:cursor-grabbing scrollbar-hide py-3">
               
               <ButtonMenu
                 titulo="Pastel Frito"
@@ -176,10 +218,16 @@ export function SectionMenu({ onAdd }: SectionMenuProps) {
                 isActive={categoria === 'bebidas'}
                 onClick={() => setCategoria('bebidas')}
               />
+
+              <ButtonMenu
+                titulo="Sobremesas"
+                isActive={categoria === 'sobremesas'}
+                onClick={() => setCategoria('sobremesas')}
+              />
           </div>
         </div>
 
-        <div ref={topRef}></div>
+        
         {/* CARDS */}
         <div 
         className="grid items-center gap-5 md:gap-8 lg:gap-10 min-[880px]:grid-cols-2  min-[1180px]:grid-cols-4">
